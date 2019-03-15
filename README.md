@@ -1,6 +1,12 @@
 # Drug-Target Interaction Prediction: End-to-End Deep Learning Approach
-
+## Two Parallel Convolution Neural Networks + Fully Connected Neural Network
 <img src="/figures/CNN_FCNN_Model.png"/>
+
+## Two Parallel Convolution Neural Networks (Pre-Trained) + Autoencoder (Pre-Trained) + Fully Connected Neural Network
+<img src="/figures/CNN_Autoencoder_FCNN_Model.png"/>
+
+## Grid Search
+<img src="/figures/Gridsearch.png"/>
 
 ## Models:
 - **Two Parallel Convolution Neural Networks + Fully Connected Neural Network** (Deep Representations)
