@@ -1,0 +1,1 @@
+Num_Filters,D_Rate,Batch,L_Rate,Smile_Filter_1,Smile_Filter_2,Smile_Filter_3,Protein_Filter_1,Protein_Filter_2,Protein_Filter_3,FC_Neurons_1,FC_Neurons_2,FC_Neurons_3,Epochs,Loss_Func,Output_Func,Act_Func_Conv,Act_Func_FC,Sensitivity,Specificity,F1_Score,Acc,
