@@ -1,4 +1,7 @@
 # Drug-Target Interaction Prediction: End-to-End Deep Learning Approach
+<p align="justify">We propose an end-to-end deep learning pipeline, capable of automatically identify important sequencial regions from 1D raw data, protein sequences and SMILES (Simplified Molecular Input Line Entry System) strings, and extract deep representations using Convolutional Neural Networks (CNN). A Fully Connected Neural Network is applied as a binary classifier, using as input the representations obtained from the CNNs.
+Additionally, we compare the proposed model with traditional machine learning approaches using both global descriptors and deep representations, a deep learning architecture based on global descriptors and also a combined deep learning model using a mix of descriptors, encoded into deep representations, and protein and compounds deep representations.</p>
+  
 ## Two Parallel Convolution Neural Networks + Fully Connected Neural Network
 <img src="/figures/CNN_FCNN_Model.png"/>
 
