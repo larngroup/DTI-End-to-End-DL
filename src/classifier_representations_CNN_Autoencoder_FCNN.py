@@ -292,9 +292,8 @@ if __name__ == '__main__':
    drop_rate=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8]
    output_act='sigmoid'
    fc_act_func='relu'
-   learning_rate=[0.0001]
+   learning_rate=[0.001,0.0001]
    loss_func='binary_crossentropy'
-   optimizer_func=Adam(lr=0.0001)
    batch=256
    epochs=500
    option_validation=True
