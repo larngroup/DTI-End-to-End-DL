@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_auc_score
+from sklearn.metrics import average_precision_score
 import numpy as np
 import pandas as pd
 import os
@@ -149,13 +150,14 @@ def f1_score(y_true,y_pred):
     return metric
 
 # Metrics Function: Sensitivity, Specificity, F1-Score, Accuracy and AUC
-def metrics_function(sensitivity,specificity,f1,accuracy,auc_value,binary_labels,predicted_labels,labels_test,confusion_matrix):
+def metrics_function(sensitivity,specificity,f1,accuracy,auc_value,auprc_value,binary_labels,predicted_labels,labels_test,confusion_matrix):
     sensitivity_value=confusion_matrix[1,1]/(confusion_matrix[1,1]+confusion_matrix[1,0])
     specificity_value= confusion_matrix[0,0]/(confusion_matrix[0,0]+confusion_matrix[0,1])
     precision=confusion_matrix[1,1]/(confusion_matrix[1,1]+confusion_matrix[0,1])
     f1_value=2*(precision*sensitivity_value)/(precision+sensitivity_value)
     accuracy=accuracy_score(labels_test,np.array(binary_labels))
     auc=roc_auc_score(labels_test,predicted_labels)
+    auprc=average_precision_score(labels_test,predicted_labels)
     metrics=[]
     if sensitivity:
         metrics.append('Sensitivity:'+str(sensitivity_value))
@@ -167,6 +169,8 @@ def metrics_function(sensitivity,specificity,f1,accuracy,auc_value,binary_labels
         metrics.append('Accuracy:'+str(accuracy))
     if auc_value:
         metrics.append('AUC:'+str(auc))
+    if auprc_value:
+        metrics.append('AUPRC: '+str(auprc))
     return metrics
 
 # Classifier
@@ -321,7 +325,7 @@ def grid_search(prot_train,smile_train,labels_train,prot_test,smile_test,labels_
                                                     binary_labels=sigmoid_to_binary(predicted_labels)
                                                     cm=confusion_matrix(labels_test,np.array(binary_labels))
                                                     #print(cm)
-                                                    metric_values=metrics_function(True,True,True,True,False,binary_labels,predicted_labels,labels_test,cm)
+                                                    metric_values=metrics_function(True,True,True,True,False,False,binary_labels,predicted_labels,labels_test,cm)
                                                     #print(metric_values)
                                                     save_func('../Results_CNN_FCNN.csv',[n_filter,d_rate,batch,l_rate,smile_filter_1,smile_filter_2,smile_filter_3,prot_filter_1,prot_filter_2,
                                                     prot_filter_3,fc_neurons_1,fc_neurons_2,fc_neurons_3,epochs,loss_func,output_act,act_func_conv,fc_act_func,

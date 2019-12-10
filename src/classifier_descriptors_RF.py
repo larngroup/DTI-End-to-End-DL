@@ -4,18 +4,20 @@ from sklearn.preprocessing import normalize
 from sklearn.ensemble import RandomForestClassifier as RF
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_auc_score
+from sklearn.metrics import average_precision_score
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import pickle
 
 # Metrics Function: Sensitivity, Specificity, F1-Score, Accuracy and AUC
-def metrics_function(sensitivity,specificity,f1,accuracy,auc_value,predicted_labels,pred_prob,labels_test,confusion_matrix):
+def metrics_function(sensitivity,specificity,f1,accuracy,auc_value,auprc_value,predicted_labels,pred_prob,labels_test,confusion_matrix):
     sensitivity_value=confusion_matrix[1,1]/(confusion_matrix[1,1]+confusion_matrix[1,0])
     specificity_value= confusion_matrix[0,0]/(confusion_matrix[0,0]+confusion_matrix[0,1])
     precision=confusion_matrix[1,1]/(confusion_matrix[1,1]+confusion_matrix[0,1])
     f1_value=2*(precision*sensitivity_value)/(precision+sensitivity_value)
     accuracy=accuracy_score(labels_test,predicted_labels)
     auc=roc_auc_score(labels_test,pred_prob)
+    auprc=average_precision_score(labels_test,pred_prob)
     metrics=[]
     if sensitivity:
         metrics.append('Sensitivity:'+str(sensitivity_value))
@@ -27,7 +29,9 @@ def metrics_function(sensitivity,specificity,f1,accuracy,auc_value,predicted_lab
         metrics.append('Accuracy:'+str(accuracy))
     if auc_value:
         metrics.append('AUC:'+str(auc))
-    return metrics    
+    if auprc_value:
+        metrics.append('AUPRC: '+str(auprc))
+    return metrics      
 
 
 # Random Forest Classifier
@@ -67,7 +71,7 @@ if __name__ == '__main__':
     print(cm)
     
     # Metrics 
-    metric_values=metrics_function(True,True,True,True,False,pred_labels,rf_clf.predict_proba(data_test)[:,1],labels_test,cm)
+    metric_values=metrics_function(True,True,True,True,False,False,pred_labels,rf_clf.predict_proba(data_test)[:,1],labels_test,cm)
     print(metric_values)
     
     
